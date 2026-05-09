@@ -94,6 +94,21 @@ function runPythonProcessor(inputPath, outputPath) {
   });
 }
 
+function getClientSafeError(error) {
+  const message = error.message || "";
+
+  if (message.includes("No module named 'cv2'") || message.includes('No module named "cv2"')) {
+    return "OpenCV is not installed on the server. Rebuild after installing processor/requirements.txt.";
+  }
+
+  const stderrLines = message
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  return stderrLines.at(-1) || "Image processing failed.";
+}
+
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
@@ -121,7 +136,7 @@ app.post("/api/blur", upload.single("image"), async (req, res) => {
     }
 
     res.status(500).json({
-      error: error.message || "Image processing failed."
+      error: getClientSafeError(error)
     });
   } finally {
     if (fs.existsSync(inputPath)) {

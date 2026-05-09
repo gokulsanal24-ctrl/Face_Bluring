@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: face-blur-detection
+    env: node
+    plan: free
+    buildCommand: npm install && python3 -m pip install -r processor/requirements.txt
+    startCommand: npm start
+    envVars:
+      - key: PYTHON_COMMAND
+        value: python3

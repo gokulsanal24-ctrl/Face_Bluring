@@ -70,6 +70,19 @@ Open:
 http://localhost:3000
 ```
 
+## Deploy on Render
+
+Use these settings if you create the Render service manually:
+
+```text
+Environment: Node
+Build Command: npm install && python3 -m pip install -r processor/requirements.txt
+Start Command: npm start
+Environment Variable: PYTHON_COMMAND=python3
+```
+
+The included `render.yaml` contains the same settings for blueprint-style deployment.
+
 ## Features
 
 - Upload JPG, PNG, and WEBP images
