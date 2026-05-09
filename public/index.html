@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Blur Detection</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">OpenCV Face Privacy Tool</p>
+            <h1>Face Blur Detection</h1>
+          </div>
+          <span class="status-pill" id="statusPill">Ready</span>
+        </div>
+
+        <section class="upload-panel" id="dropZone">
+          <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp" hidden />
+          <div class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M12 3a1 1 0 0 1 .74.33l4 4a1 1 0 1 1-1.48 1.34L13 6.18V15a1 1 0 1 1-2 0V6.18L8.74 8.67a1 1 0 0 1-1.48-1.34l4-4A1 1 0 0 1 12 3Z" />
+              <path d="M5 14a1 1 0 0 1 1 1v3h12v-3a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1Z" />
+            </svg>
+          </div>
+          <div class="upload-copy">
+            <h2>Drop an image here</h2>
+            <p>JPG, PNG, or WEBP up to 8 MB</p>
+          </div>
+          <button class="primary-button" id="browseButton" type="button">Choose Image</button>
+        </section>
+
+        <div class="actions">
+          <button class="primary-button" id="processButton" type="button" disabled>Blur Faces</button>
+          <a class="download-button disabled" id="downloadButton" href="#" download="blurred-face-image.jpg">Download</a>
+        </div>
+
+        <div class="message" id="message" role="status" aria-live="polite"></div>
+
+        <section class="preview-grid">
+          <article class="preview-card">
+            <div class="preview-heading">
+              <h2>Original</h2>
+              <span id="fileMeta">No image selected</span>
+            </div>
+            <div class="image-stage empty" id="originalStage">
+              <img id="originalPreview" alt="Original uploaded preview" />
+              <span>Select an image to preview it</span>
+            </div>
+          </article>
+
+          <article class="preview-card">
+            <div class="preview-heading">
+              <h2>Blurred Output</h2>
+              <span id="faceCount">Waiting</span>
+            </div>
+            <div class="image-stage empty" id="outputStage">
+              <div class="loader" id="loader" hidden></div>
+              <img id="outputPreview" alt="Blurred face output preview" />
+              <span id="outputPlaceholder">Processed image will appear here</span>
+            </div>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
